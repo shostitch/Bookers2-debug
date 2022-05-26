@@ -9,14 +9,21 @@
 	  <th><%= user.introduction %></th>
 	</tr>
 	<tr>
-    <th>フォロー数:
-    <%= link_to "relationships/followings" do %>
-      <%= user.followings.count %>
-    <% end %>
+    <th>follows</th>
+    <th>
+      <%= link_to  user_followings_path(user) do %>
+        <%= user.followings.count %>
+      <% end %>
     </th>
+
   </tr>
   <tr>
-    <th>フォロワー数: <%= user.followers.count %></th>
+    <th>followers</th>
+    <th>
+      <%= link_to  user_followings_path(user) do %>
+        <%= user.followers.count %>
+      <% end %>
+    </th>
   </tr>
 </table>
 
