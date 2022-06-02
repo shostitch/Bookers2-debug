@@ -30,7 +30,7 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-   def self.search_for(content, method)
+  def self.search_for(content, method)
     if method == 'perfect'
       User.where(name: content)
     elsif method == 'forward'
@@ -41,8 +41,8 @@ class User < ApplicationRecord
       User.where('name LIKE ?', '%' + content + '%')
     end
   end
-  
-  def get_profile_image
+
+  def get_profile_image(width,height)
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
 end
