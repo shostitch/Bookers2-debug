@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
  devise_for :users
 
@@ -13,7 +14,9 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create,:destroy]
     resources :book_comments, only: [:create,:destroy]
   end
-  get '/search', to: 'searches#search'
+  get '/search' => 'searches#search'
+  get "chat/:id" => "chats#show",as: "chat"
+    resources :chats,only: [:create]
 
 
 end

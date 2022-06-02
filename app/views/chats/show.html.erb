@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">
+      <h2><%= @user.name %>さんとのチャット</h2>
+
+<div class="message">
+        <% @chats.each do |chat| %>
+          <% if chat.user_id == current_user.id %>
+                <p style="text-align: left;"><%= chat.message %></p>
+          <% else %>
+                <p style="text-align: right;"><%= chat.message %></p>
+          <% end %>
+      <% end %>
+</div>
+
+      <%= form_with model: @chat, local: false do |f| %>
+        <%= f.text_field :message %>
+        <%= f.hidden_field :room_id %>
+        <%= f.submit "送信", class:"btn btn-sm btn-success chat-btn" %>
+      <% end %>
+    </div>
+  </div>
+</div>
