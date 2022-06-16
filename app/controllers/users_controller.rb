@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :correct_user, only: [:edit,:update]
 
   def show
@@ -6,7 +7,10 @@ class UsersController < ApplicationController
 
     to = Time.current.at_end_of_day
     from = (to - 6.day).at_beginning_of_day
-    @books = @user.books.includes(:favorited_users).sort{|a,b| b.favorited_users.where(created_at: from...to).size <=> a.favorited_users.where(created_at: from...to).size}
+    @books = Book.all.sort {|a,b|
+      b.favorites.where(created_at: from...to).size <=>
+      a.favorites.where(created_at: from...to).size
+    }
     @book = Book.new
   end
 
